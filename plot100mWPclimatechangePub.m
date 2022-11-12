@@ -1,5 +1,5 @@
 %% load options
-caseswitch=3; 
+caseswitch=1; 
 %1 for figure 9, delta 250; 2 for figure 10, delta 63; 3 for S7
 
 switch caseswitch
@@ -11,6 +11,7 @@ filestart1='pset_10_4km_bipit_del250_2100_v3_';
 filestart1v='pset_10_4km_bipit_del250_2100_v3_64visc_';
 fileend='_his.mat';
 fileend0='_his.mat';
+fileend0v='_his.mat';
 w=-5;
     case 2
 filemid={'a','b','c','d','e','f','g','h'};
@@ -20,6 +21,7 @@ filestart1='pset_10_4km_bipit_del63_2100_v3_';
 filestart1v='pset_10_4km_bipit_del63_2100_v3_64visc_';
 fileend='_his.mat';
 fileend0='_hisV2.mat';
+fileend0v='_his.mat';
 w=-1.26;
     case 3
 filemid={'a','b','c','d','e','f','g'};%,'h'};
@@ -27,8 +29,9 @@ filestart0='pset_10_4km_bipit_del250_';
 filestart0v='pset_10_4km_bipit_del250_64visc_';
 filestart1='pset_10_4km_bipit_del250_2100_';
 filestart1v='pset_10_4km_bipit_del250_2100_64visc_';
-fileend='_his.mat';
+fileend='_hisV2.mat';
 fileend0='_his.mat';
+fileend0v='_his.mat';
 w=-5;
 end
 %% load
@@ -49,7 +52,7 @@ load(fn,'varmeans')
 wsp0=w*varmeans.p(11,:)./86400;
 wp0=varmeans.wp(11,:);
 wppp0=varmeans.wppp(11,:);
-fn=strcat(filestart0v,filemid{fct},fileend);
+fn=strcat(filestart0v,filemid{fct},fileend0v);
 load(fn,'varmeans','ocean_time')
 time0v=ocean_time;
 wsp0v=w*varmeans.p(11,:)./86400;
@@ -68,7 +71,7 @@ load(fn,'varmeans')
 wsp1=cat(2,wsp1,w*varmeans.p(11,:)./86400);
 wp1=cat(2,wp1,varmeans.wp(11,:));
 wppp1=cat(2,wppp1,varmeans.wppp(11,:));
-fn=strcat(filestart0v,filemid{fct},fileend);
+fn=strcat(filestart0v,filemid{fct},fileend0v);
 load(fn,'varmeans','ocean_time')
 time0v=cat(1,time0v,ocean_time);
 wsp0v=cat(2,wsp0v,w*varmeans.p(11,:)./86400);
@@ -83,13 +86,12 @@ end
 
 if length(filemid)==8
     fct=8;
-    fn=strcat(filestart0v,filemid{fct},fileend);
+    fn=strcat(filestart0v,filemid{fct},fileend0v);
     load(fn,'varmeans','ocean_time')
     time0v=cat(1,time0v,ocean_time);
     wsp0v=cat(2,wsp0v,w*varmeans.p(11,:)./86400);
     wp0v=cat(2,wp0v,varmeans.wp(11,:));
     wppp0v=cat(2,wppp0v,varmeans.wppp(11,:));
-    fn=strcat(filestart0,filemid{fct},fileend);
 end
 
 
@@ -108,7 +110,9 @@ ylabel({'total','mmol P m/s'})
 yyaxis right
 plot(day1,wsp1+wp1,'LineWidth',2)
 plot(day1,wsp1v+wp1v,'m')
+if caseswitch<3
 ylim(0.1*y1);
+end
 datetick('x',3)
 xlim([4052 5310])
 
@@ -122,7 +126,9 @@ ylabel({'w_sP','mmol P m/s'})
 yyaxis right
 plot(day1,wsp1,'LineWidth',2)
 plot(day1,wsp1v,'m')
+if caseswitch<3
 ylim(0.1*y2);
+end
 datetick('x',4)
 xlim([4052 5310])
 
@@ -135,7 +141,9 @@ ylabel({'wP','mmol P m/s'})
 yyaxis right
 plot(day1,wp1,'LineWidth',2)
 plot(day1,wp1v,'m')
+if caseswitch<3
 ylim(0.1*y3);
+end
 datetick('x',3)
 xlim([4052 5310])
 
@@ -148,7 +156,9 @@ ylabel({'wP','mmol P m/s'})
 yyaxis right
 plot(day1,wppp1,'LineWidth',2)
 plot(day1,wppp1v,'m')
+if caseswitch<3
 ylim(0.05*y4);
+end
 datetick('x',4)
 xlim([4052 5310])
 xlabel('simulation month')
