@@ -1,6 +1,7 @@
 # submesoBioROMS
 ROMS study of biological impact of submesoscale ocean activity changing with climate
 
+[![DOI](https://zenodo.org/badge/564353887.svg)](https://zenodo.org/badge/latestdoi/564353887)
 
 Codes for the analysis performed for the following paper:
 Submesoscale effects on changes to export production under global warming
